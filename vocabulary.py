@@ -1,7 +1,7 @@
 import nltk
 import pickle
 import os.path
-from pycocotools.coco import COCO
+#from pycocotools.coco import COCO
 from collections import Counter
 
 class Vocabulary(object):
@@ -37,44 +37,44 @@ class Vocabulary(object):
             with open(self.vocab_file, 'wb') as f:
                 pickle.dump(self, f)
 
-    def build_vocab(self):
+#    def build_vocab(self):
 
-        self.init_vocab()
-        self.add_word(self.start_word)
-        self.add_word(self.end_word)
-        self.add_word(self.unk_word)
-        self.add_captions()
+ #       self.init_vocab()
+ #       self.add_word(self.start_word)
+ #       self.add_word(self.end_word)
+ #       self.add_word(self.unk_word)
+ #       self.add_captions()
 
-    def init_vocab(self):
+  #  def init_vocab(self):
 
-        self.word2idx = {}
-        self.idx2word = {}
-        self.idx = 0
+ #       self.word2idx = {}
+#        self.idx2word = {}
+ #       self.idx = 0
 
-    def add_word(self, word):
+#    def add_word(self, word):
 
-        if not word in self.word2idx:
-            self.word2idx[word] = self.idx
-            self.idx2word[self.idx] = word
-            self.idx += 1
+#        if not word in self.word2idx:
+ #           self.word2idx[word] = self.idx
+ #           self.idx2word[self.idx] = word
+ #           self.idx += 1
 
-    def add_captions(self):
+ #   def add_captions(self):
+#
+#        coco = COCO(self.annotations_file)
+#        counter = Counter()
+#        ids = coco.anns.keys()
+#        for i, id in enumerate(ids):
+#            caption = str(coco.anns[id]['caption'])
+#            tokens = nltk.tokenize.word_tokenize(caption.lower())
+#            counter.update(tokens)
 
-        coco = COCO(self.annotations_file)
-        counter = Counter()
-        ids = coco.anns.keys()
-        for i, id in enumerate(ids):
-            caption = str(coco.anns[id]['caption'])
-            tokens = nltk.tokenize.word_tokenize(caption.lower())
-            counter.update(tokens)
+ #           if i % 100000 == 0:
+ #               print("[%d/%d] Tokenizing captions..." % (i, len(ids)))
 
-            if i % 100000 == 0:
-                print("[%d/%d] Tokenizing captions..." % (i, len(ids)))
-
-        words = [word for word, cnt in counter.items() if cnt >= self.vocab_threshold]
-
-        for i, word in enumerate(words):
-            self.add_word(word)
+#        words = [word for word, cnt in counter.items() if cnt >= self.vocab_threshold]
+#
+#        for i, word in enumerate(words):
+#            self.add_word(word)
 
     def __call__(self, word):
         if not word in self.word2idx:
