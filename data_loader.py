@@ -4,6 +4,8 @@ import torch
 import torch.utils.data as data
 from vocabulary import Vocabulary
 from PIL import Image
+import sys
+sys.path.append('/opt/cocoapi/PythonAPI')
 from pycocotools.coco import COCO
 import numpy as np
 from tqdm import tqdm

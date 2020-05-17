@@ -11,7 +11,7 @@ import torch.utils.data as data
 import numpy as np
 import os
 
-batch_size = 128   
+batch_size = 48   
 vocab_threshold = 4 
 vocab_from_file = True 
 embed_size = 256 
@@ -96,4 +96,4 @@ for epoch in range(1, num_epochs+1):
         torch.save(decoder.state_dict(), os.path.join('./models', 'decoder-%d.pkl' % epoch))
         torch.save(encoder.state_dict(), os.path.join('./models', 'encoder-%d.pkl' % epoch))
 
-f.close()
+f.close() 

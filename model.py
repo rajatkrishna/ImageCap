@@ -53,11 +53,12 @@ class DecoderRNN(nn.Module):
 
             out = out.squeeze(dim = 1)
             out = self.linear(out)
-            _, pred = int(torch.max(out, 1))
-            output.append(pred)
-            
+            _, pred = torch.max(out, 1)
             if pred == 1:
                 break
+            output.append(int(pred))
+            
+            
             inputs = self.word_embedding(pred)
             inputs = inputs.unsqueeze(dim = 1)
 
